@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavorite, removeFavorite } from "../redux/action";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RecipeCard = ({ recipe }) => {
   const dispatch = useDispatch();
@@ -11,8 +13,24 @@ const RecipeCard = ({ recipe }) => {
   const handleFavoriteClick = () => {
     if (isFavorite) {
       dispatch(removeFavorite(recipe.recipe.uri));
+      toast.success("Recipe removed from favorites! ❌", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     } else {
       dispatch(addFavorite(recipe));
+      toast.success("Recipe added to favorites! ❤️", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
   };
 
@@ -25,7 +43,6 @@ const RecipeCard = ({ recipe }) => {
       />
       <h2 className="text-2xl font-bold text-gray-800 mb-2">{recipe.recipe.label}</h2>
 
-
       <div>
         <h3 className="text-xl font-semibold text-gray-800 mb-2">Nutritional Information:</h3>
         <ul className="list-disc list-inside">
@@ -35,6 +52,7 @@ const RecipeCard = ({ recipe }) => {
           <li className="text-gray-600">Carbohydrates: {recipe.recipe.carbs}g</li>
         </ul>
       </div>
+
       <button
         onClick={() => setShowDetails(!showDetails)}
         className="text-blue-500 font-semibold hover:text-blue-600 mb-4 text-left"
@@ -72,10 +90,11 @@ const RecipeCard = ({ recipe }) => {
 
       <button
         onClick={handleFavoriteClick}
-        className={`mt-auto px-6 py-3 rounded-md font-semibold transition-colors duration-300 ${isFavorite
+        className={`mt-auto px-6 py-3 rounded-md font-semibold transition-colors duration-300 ${
+          isFavorite
             ? "bg-red-500 text-white hover:bg-red-600"
             : "bg-gray-200 text-gray-800 hover:bg-gray-300"
-          }`}
+        }`}
       >
         {isFavorite ? "Remove from Favorites ❤️" : "Add to Favorites ❤️"}
       </button>
