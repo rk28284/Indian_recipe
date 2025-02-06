@@ -14,7 +14,7 @@ const Filters = () => {
 
   return (
     <div className="p-4 flex justify-end items-center gap-4">
-     
+
 
       <select
         className="border p-2 rounded-md"
