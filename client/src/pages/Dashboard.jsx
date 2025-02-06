@@ -17,7 +17,7 @@ dispatch(fetchRecipes())
 },[])
 
   return (
-    <div className="p-6">
+    <div className="p-2">
 
       {isLoading && <p>Loading...</p>}
       {isError && <p className="text-red-500">Error fetching recipes.</p>} 
